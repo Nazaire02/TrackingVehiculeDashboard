@@ -10,6 +10,7 @@ import AllDrivers from './containers/AllDrivers'
 import DetailsCarburant from './containers/DetailsCarburant'
 import DetailsMaintenance from './containers/DetailsMaintenance'
 import Tracking from './containers/Tracking'
+import Register from './containers/Register'
 
 
 
@@ -19,6 +20,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/' element={<Login/>}/>
+        <Route path='/Register' element={<Register/>}/>
         <Route  path='/home' element={<Home/>}>
           <Route path='AllDrivers' element={<AllDrivers/>}/>
           <Route path='Tracking' element={<Tracking/>}/>

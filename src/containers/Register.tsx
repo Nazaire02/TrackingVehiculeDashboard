@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-function Login() {
+function Register() {
     const [isShowPassword, setIsShowPassword] = useState(false)
     return (
         <div className="container-xxl col-10 col-sm-10 col-md-8 col-lg-5">
@@ -10,17 +10,21 @@ function Login() {
                     <div className="card">
                         <div className="card-body">
                             <div className="app-brand justify-content-center">
-                                <span className="app-brand-text demo text-body fw-bold mb-3">Connexion</span>
+                                <span className="app-brand-text demo text-body fw-bold mb-3">Inscription</span>
                             </div>
-                            <p className="mb-4">Veillez remplir le formulaire ci dessous pour vous connecter</p>
+                            <p className="mb-4">Veillez remplir le formulaire ci dessous pour créer un compte</p>
 
                             <form id="formAuthentication" className="mb-3" action="index.html" method="POST">
                                 <div className="mb-3">
                                     <label className="form-label">Email</label>
                                     <input type="text" className="form-control" id="email" name="email-username" placeholder="Enter your email" />
                                 </div>
+                                <div className="mb-3">
+                                    <label className="form-label">Username</label>
+                                    <input type="text" className="form-control" placeholder="Enter your username" />
+                                </div>
                                 <div className="mb-3 form-password-toggle">
-                                <div className="d-flex justify-content-between">
+                                    <div className="d-flex justify-content-between">
                                         <label className="form-label">Password</label>
                                     </div>
                                     {!isShowPassword && <div className="input-group input-group-merge">
@@ -41,14 +45,14 @@ function Login() {
                                     </div>
                                 </div>
                                 <div className="mb-3">
-                                    <button className="btn btn-primary d-grid w-100" type="submit">Se connecter</button>
+                                    <button className="btn btn-primary d-grid w-100" type="submit">S'inscrire</button>
                                 </div>
                             </form>
 
                             <p className="text-center">
-                                <span>Nouveau sur la plateforme?</span>
+                                <span>Déjà un compte sur la plateforme?</span>
                                 <a href="auth-register-basic.html">
-                                    <Link to="/register">Créer un compte</Link>
+                                    <Link to="/">Se connecter</Link>
                                 </a>
                             </p>
                         </div>
@@ -59,4 +63,4 @@ function Login() {
     )
 }
 
-export default Login
+export default Register
