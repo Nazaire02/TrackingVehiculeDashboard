@@ -3,15 +3,11 @@ import { Link } from "react-router-dom";
 
 export function Sidebar() {
     const [isShow, setIsShow] = useState(false);
-    const [activeItem, setActiveItem] = useState("");
+    //const [activeItem, setActiveItem] = useState("");
 
     function toggle() {
         setIsShow(!isShow)
-    };
-
-    function itemActivated(itemName: string) {
-        setActiveItem(itemName)
-    };
+    }
 
     return (
         <aside id="layout-menu" className="layout-menu menu-vertical menu bg-menu-theme">
@@ -20,7 +16,7 @@ export function Sidebar() {
                     {/* <span className="app-brand-logo demo">
 
                 </span> */}
-                    <span className="app-brand-text demo menu-text fw-bold">Tracking véhicule</span>
+                    <span className="app-brand-text demo menu-text fw-bold text-capitalize">Tracking véhicule</span>
                 </a>
 
                 <a href="javascript:void(0);" className="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -34,14 +30,13 @@ export function Sidebar() {
                 <li className="menu-item active open">
                     <a className="menu-link menu-toggle" onClick={toggle}>
                         <i className="menu-icon tf-icons bx bx-home-circle"></i>
-                        <div data-i18n="Dashboards">Dashboards</div>
-                        <div className="badge bg-danger rounded-pill ms-auto">5</div>
+                        <div data-i18n="Dashboards">Dashboard</div>
                     </a>
                     {isShow && <ul className="menu-sub">
                         <li className="menu-item">
                             <Link to="/home/AllDrivers" className="menu-link">Mes conducteurs</Link>
                         </li>
-                        <li className="menu-item active">
+                        <li className="menu-item">
                             <Link to="/home/Tracking" className="menu-link">Tracker vehicule</Link>
                         </li>
                         <li className="menu-item">
