@@ -5,6 +5,7 @@ import VehiculeSlice from './VehiculeSlice'
 import ConduireSlice from './ConduireSlice'
 import CarburantSlice from './CarburantSlice'
 import MaintenanceSlice from './MaintenanceSlice'
+import HomeSlice from './HomeSlice'
 
 
 const rootReduceur = combineReducers({
@@ -12,15 +13,19 @@ const rootReduceur = combineReducers({
     adminLogout: AuthSlice.adminLogout,
     conducteurCreate: ConducteurSlice.conducteurCreate,
     conducteurGetAll: ConducteurSlice.conducteurGetAll,
+    conducteurGetDetail: ConducteurSlice.conducteurGetDetail,
     conducteurDelete: ConducteurSlice.conducteurDelete,
     vehiculeCreate: VehiculeSlice.vehiculeCreate,
     vehiculeGetAll: VehiculeSlice.vehiculeGetAll,
+    vehiculeGetDetail: VehiculeSlice.vehiculeGetDetail,
     vehiculeDelete: VehiculeSlice.vehiculeDelete,
     conduireCreate: ConduireSlice.conduireCreate,
+    conduireGetAll: ConduireSlice.conduireGetAll,
     carburantCreate: CarburantSlice.carburantCreate,
     carburantGetAll: CarburantSlice.carburantGetAll,
     MaintenanceCreate: MaintenanceSlice.MaintenanceCreate,
-    MaintenanceGetAll: MaintenanceSlice.MaintenanceGetAll
+    MaintenanceGetAll: MaintenanceSlice.MaintenanceGetAll,
+    home: HomeSlice.home
 })
 
 export default rootReduceur

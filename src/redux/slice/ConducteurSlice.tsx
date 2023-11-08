@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createConducteur, deleteConducteur, getAllConducteur } from '../actions/ConducteurAction';
+import { createConducteur, deleteConducteur, getAllConducteur, getDetailConducteur } from '../actions/ConducteurAction';
 
 
 interface conducteurState {
@@ -35,6 +35,29 @@ export const getAllConducteurSlice = createSlice({
             state.conducteur = null; 
           });
     }
+})
+
+export const getDetailConducteurSlice = createSlice({
+  name: 'conducteurGetDetail', 
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+        .addCase(getDetailConducteur.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(getDetailConducteur.fulfilled, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.conducteur = action.payload;
+          state.error = null; 
+        })
+        .addCase(getDetailConducteur.rejected, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.error = action.payload;
+          state.conducteur = null; 
+        });
+  }
 })
 
 export const createConducteurSlice = createSlice({
@@ -86,7 +109,8 @@ export const deleteConducteurSlice = createSlice({
 const rootReducer = {
     conducteurCreate: createConducteurSlice.reducer,
     conducteurGetAll: getAllConducteurSlice.reducer,
-    conducteurDelete: deleteConducteurSlice.reducer
+    conducteurDelete: deleteConducteurSlice.reducer,
+    conducteurGetDetail: getDetailConducteurSlice.reducer
 };
   
   export default rootReducer

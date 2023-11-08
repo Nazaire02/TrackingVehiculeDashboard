@@ -15,6 +15,19 @@ export const getAllConducteur = createAsyncThunk(
     }
 );
 
+export const getDetailConducteur = createAsyncThunk(
+  'conducteur/get-detail',
+  async (conducteurData, { rejectWithValue }) => {
+    try {
+      const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.GET_DETAIL_CHAUFFEUR}`, conducteurData, { withCredentials: true, headers: { 'Authorization': `Bearer ${conducteurData?.token}`} });
+      console.log('response', response.data)
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const createConducteur = createAsyncThunk(
     'conducteur/create',
     async (conducteurData, { rejectWithValue }) => {

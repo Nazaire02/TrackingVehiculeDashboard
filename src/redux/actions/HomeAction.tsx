@@ -3,10 +3,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import ApiConstant from '../../constants/ApiConstant';
 
 export const getHome = createAsyncThunk(
-    'carburant/get-all',
-    async (_, { rejectWithValue }) => {
+    'home/home',
+    async (homeData, { rejectWithValue }) => {
       try {
-        const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.GET_ALL_CARBURANT}`, { withCredentials: true });
+        const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.HOME}`, { withCredentials: true, headers: { 'Authorization': `Bearer ${homeData}`} });
         return response.data;
       } catch (error: any) {
         return rejectWithValue(error.response.data);

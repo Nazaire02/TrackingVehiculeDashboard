@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createConduire } from '../actions/ConduireAction';
+import { createConduire, getAllConduire } from '../actions/ConduireAction';
 
 
 interface conduireState {
@@ -13,6 +13,31 @@ const initialState: conduireState = {
     loading: false,
     error: null,
 };
+
+export const getAllConduireSlice = createSlice({
+  name: 'conduireGetAll', 
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+        .addCase(getAllConduire.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(getAllConduire.fulfilled, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.conduire = action.payload;
+          state.error = null; 
+        })
+        .addCase(getAllConduire.rejected, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.error = action.payload;
+          state.conduire = null; 
+        });
+  }
+})
+
+
 
 export const createConduireSlice = createSlice({
     name: 'conduireCreate', 
@@ -39,6 +64,7 @@ export const createConduireSlice = createSlice({
 
 const rootReducer = {
     conduireCreate: createConduireSlice.reducer,
+    conduireGetAll: getAllConduireSlice.reducer
 };
   
   export default rootReducer

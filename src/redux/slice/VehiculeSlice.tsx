@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createVehicule, deleteVehicule, getAllVehicule } from '../actions/VehiculeAction';
+import { createVehicule, deleteVehicule, getAllVehicule, getDetailVehicule } from '../actions/VehiculeAction';
 
 
 interface VehiculeState {
@@ -35,6 +35,29 @@ export const getAllVehiculeSlice = createSlice({
             state.vehicule = null; 
           });
     }
+})
+
+export const getDetailVehiculeSlice = createSlice({
+  name: 'vehiculeGetDetail', 
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+        .addCase(getDetailVehicule.pending, (state) => {
+          state.loading = true;
+          state.error = null;
+        })
+        .addCase(getDetailVehicule.fulfilled, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.vehicule = action.payload;
+          state.error = null; 
+        })
+        .addCase(getDetailVehicule.rejected, (state, action: PayloadAction<any>) => {
+          state.loading = false;
+          state.error = action.payload;
+          state.vehicule = null; 
+        });
+  }
 })
 
 export const createVehiculeSlice = createSlice({
@@ -86,7 +109,8 @@ export const deleteVehiculeSlice = createSlice({
 const rootReducer = {
     vehiculeCreate: createVehiculeSlice.reducer,
     vehiculeGetAll: getAllVehiculeSlice.reducer,
-    vehiculeDelete: deleteVehiculeSlice.reducer
+    vehiculeDelete: deleteVehiculeSlice.reducer,
+    vehiculeGetDetail: getDetailVehiculeSlice.reducer
 };
   
   export default rootReducer
