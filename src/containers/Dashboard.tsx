@@ -6,6 +6,7 @@ import Helper from "../helpers/Helper";
 import { getHome } from "../redux/actions/HomeAction";
 import { getAllConduire } from "../redux/actions/ConduireAction";
 import { getDetailConducteur } from "../redux/actions/ConducteurAction";
+import voiture from '../assets/img/voiture.jpg'
 
 export default function Dashboard() {
     const [Data, setData] = useState([])
@@ -14,6 +15,8 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const { home } = useSelector((state: any) => state?.home);
     const { conduire } = useSelector((state: any) => state?.conduireGetAll);
+
+
 
     const user = Helper()
 
@@ -39,8 +42,6 @@ export default function Dashboard() {
         });
     }, [dispatch, navigate, user]);
 
-    
-
     useEffect(() => {
         if (home) {
             setData(home)
@@ -52,7 +53,7 @@ export default function Dashboard() {
     }, [home, conduire]);
 
     console.log('home', Data?.data)
-    console.log('all conduire', conduire)
+    console.log('all conduire', conduire?.data)
 
     return (
         <div className="container-xxl flex-grow-1 container-p-y">
@@ -85,7 +86,7 @@ export default function Dashboard() {
                             <small>Total Vehicules </small>
                         </div>
                         <span className="badge bg-label-danger rounded p-2">
-                            <i className="bx bx-user-plus bx-sm"></i>
+                            <i className="fa-solid fa-car" style={{fontSize: 22}}></i>
                         </span>
                         </div>
                     </div>
@@ -102,7 +103,7 @@ export default function Dashboard() {
                             <small>Total Vehicule occupé</small>
                         </div>
                         <span className="badge bg-label-success rounded p-2">
-                            <i className="bx bx-group bx-sm"></i>
+                            <i className="fa-solid fa-car" style={{fontSize: 22}}></i>
                         </span>
                         </div>
                     </div>
@@ -119,7 +120,7 @@ export default function Dashboard() {
                             <small>Total Vehicule non occupé</small>
                         </div>
                         <span className="badge bg-label-warning rounded p-2">
-                            <i className="bx bx-user-voice bx-sm"></i>
+                            <i className="fa-solid fa-car" style={{fontSize: 22}}></i>
                         </span>
                         </div>
                     </div>
@@ -127,7 +128,7 @@ export default function Dashboard() {
                 </div>
             </div>
             <div className="row">
-                <div className="col-md-6">
+                <div className="col-md-7">
                     <div className="card">
                         <h5 className="card-header">Véhicule associé à un chauffeur</h5>
                         <div className="table-responsive text-nowrap">
@@ -141,7 +142,22 @@ export default function Dashboard() {
                                 </thead>
                                 <tbody>
                                     {
-                                        
+                                        conduire?.data?.map((element, index) => (
+                                            <tr key={index}>
+                                                <td>
+                                                    <div className="d-flex align-items-center me-2">
+                                                        <img src={voiture} alt="" style={{"width": 45, "height": 45}}
+                                                            className="rounded-circle" />
+                                                        <div className="ms-3">
+                                                            <p className="fw-bold mb-1">{element.Vehicule.immatriculation_vehicule}</p>
+                                                            <p className="text-muted mb-0">{element.Vehicule.marque} {element.Vehicule.couleur}</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{element.Chauffeur.nom} {element.Chauffeur.prenom}</td>
+                                                <td>{element.date}</td>
+                                            </tr>
+                                        ))
                                     }
                                 </tbody> 
                             </table>
