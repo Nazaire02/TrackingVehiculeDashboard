@@ -1,6 +1,17 @@
 import Dropdown from 'react-bootstrap/Dropdown';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getAllConducteur } from '../redux/actions/ConducteurAction';
 
 function AllDrivers() {
+
+    const dispach = useDispatch();
+    const { conducteur, error } = useSelector((state: any) => state?.conducteurGetAll);
+    dispach(getAllConducteur());
+
+    console.log(conducteur);
+
+
     return (
         <>
             <h4 className="py-3 mb-4"><span className="text-muted fw-light">Liste /</span> Mes conducteurs</h4>
@@ -64,7 +75,7 @@ function AllDrivers() {
                 </div>
             </div>
             <div className="d-flex justify-content-between">
-            <button type="button" className="btn rounded-pill btn-primary ms-auto mt-4">Créer un conducteur</button>
+            <Link to="/home/CreateDriver" type="button" className="btn rounded-pill btn-primary ms-auto mt-4">Créer un conducteur</Link>
 </div>
         </>
     )

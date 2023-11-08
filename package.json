@@ -37,6 +37,6 @@
     "vite": "^4.4.5"
   },
   "projectConfig": {
-    "backendApiBaseUrl": "http://192.168.1.25:7000"
+    "backendApiBaseUrl": "http://192.168.1.68:7000"
   }
 }
