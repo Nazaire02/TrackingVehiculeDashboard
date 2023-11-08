@@ -33,6 +33,9 @@ export function Sidebar() {
                         <div data-i18n="Dashboards">Dashboard</div>
                     </a>
                     {isShow && <ul className="menu-sub">
+                         <li className="menu-item">
+                            <Link to="/home" className="menu-link">Accueil</Link>
+                        </li>
                         <li className="menu-item">
                             <Link to="/home/AllDrivers" className="menu-link">Mes conducteurs</Link>
                         </li>

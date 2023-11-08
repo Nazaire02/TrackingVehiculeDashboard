@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { SetStateAction, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { createConducteur } from "../redux/actions/ConducteurAction";
+import Helper from "../helpers/Helper";
 
 function CreateDriver() {
     const [nom, setNom] = useState('');
@@ -21,9 +22,22 @@ function CreateDriver() {
     const { conducteur, error } = useSelector((state: any) => state?.conducteurCreate);
     console.log(conducteur)
 
+    const user = Helper()
+
     const createDriver = (event) => {
         event.preventDefault();
-        const conducteurData = { nom, prenom, date_naissance, numero_piece_identite, telephone, salaire, adresse, username, password }
+        const conducteurData = { 
+            nom, 
+            prenom, 
+            date_naissance, 
+            numero_piece_identite, 
+            telephone, 
+            salaire, 
+            adresse, 
+            username, 
+            password,
+            token: user?.token 
+        }
         dispach(createConducteur(conducteurData));
         console.log(conducteur)
     };
@@ -60,11 +74,12 @@ function CreateDriver() {
     };
 
     return (
-        <>        <div className="alert alert-danger alert-dismissible" role="alert">
-        This is a danger dismissible alert — check it out!
-        <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
-        </button>
-      </div>
+        <>        
+            {/* <div className="alert alert-danger alert-dismissible" role="alert">
+                This is a danger dismissible alert — check it out!
+                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div> */}
             <div className="card mb-4">
                 <h5 className="card-header">Formulaire de création de conducteur</h5>
                 <form className="card-body" onSubmit={createDriver}>
@@ -153,7 +168,7 @@ function CreateDriver() {
                     </div>
                     <div className="pt-4">
                         <button type="submit" className="btn btn-primary me-sm-3 me-1">Créer</button>
-                        <Link to="/home/AllDriver" className="btn btn-label-secondary">Retour</Link>
+                        <Link to="/home/AllDrivers" className="btn btn-label-secondary">Retour</Link>
                     </div>
                 </form>
             </div>

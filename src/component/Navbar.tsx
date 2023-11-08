@@ -11,6 +11,7 @@ export function Navbar() {
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { admin, error, loading } = useSelector((state: any) => state?.adminLogout);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -28,8 +29,14 @@ export function Navbar() {
     const logoutSubmit = (event) => {
         event.preventDefault();
         dispatch(logoutAdmin(user.token));
-        navigate('/'); 
     };
+
+    useEffect(() => {
+        if (admin) {
+          AuthUser.RemoveAuth()
+          navigate("/");
+        }
+    }, [admin, navigate])
 
     return (
             <nav

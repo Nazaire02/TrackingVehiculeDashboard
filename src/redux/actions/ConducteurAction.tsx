@@ -4,9 +4,10 @@ import ApiConstant from '../../constants/ApiConstant';
 
 export const getAllConducteur = createAsyncThunk(
     'conducteur/get-all',
-    async ({ rejectWithValue }) => {
+    async (conducteurData, { rejectWithValue }) => {
       try {
-        const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.GET_ALL_CHAUFFEUR}`, { withCredentials: true });
+        const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.GET_ALL_CHAUFFEUR}`, { withCredentials: true, headers: { 'Authorization': `Bearer ${conducteurData}`} });
+        console.log('response', response.data)
         return response.data;
       } catch (error: any) {
         return rejectWithValue(error.response.data);
@@ -18,7 +19,7 @@ export const createConducteur = createAsyncThunk(
     'conducteur/create',
     async (conducteurData, { rejectWithValue }) => {
       try {
-        const response = await AuthRequest.post(`${ApiConstant.BACKEND_API.CREATE_CHAUFFEUR}`, conducteurData, { withCredentials: true });
+        const response = await AuthRequest.post(`${ApiConstant.BACKEND_API.CREATE_CHAUFFEUR}`, conducteurData, { withCredentials: true, headers: { 'Authorization': `Bearer ${conducteurData?.token}`} });
         return response.data;
       } catch (error: any) {
         return rejectWithValue(error.response.data);

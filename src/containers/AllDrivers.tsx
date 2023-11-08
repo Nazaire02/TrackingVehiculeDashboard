@@ -1,15 +1,37 @@
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllConducteur } from '../redux/actions/ConducteurAction';
+import { useEffect, useState } from 'react'
+import Helper from '../helpers/Helper';
 
 function AllDrivers() {
+    const [DataConducteur, setDateConducteur] = useState([])
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const { conducteur } = useSelector((state: any) => state?.conducteurGetAll);
+    
+    const user = Helper()
 
-    const dispach = useDispatch();
-    const { conducteur, error } = useSelector((state: any) => state?.conducteurGetAll);
-    dispach(getAllConducteur());
+    useEffect(() => {
+        console.log('token', user?.token)
+        dispatch(getAllConducteur(user?.token))
+        .then((response) => {
+            console.log('response', response);
+            navigate('/home/AllDrivers');
+        })
+        .catch((error: unknown) => {
+            console.error('Erreur lors de la récupération des conducteurs :', error);
+        });
+    }, [dispatch, navigate, user]);
 
-    console.log(conducteur);
+    useEffect(() => {
+        if (conducteur) {
+            setDateConducteur(conducteur)
+        }
+    }, [conducteur]);
+
+    console.log('conducteur', DataConducteur?.data);
 
 
     return (
@@ -30,46 +52,28 @@ function AllDrivers() {
                             </tr>
                         </thead>
                         <tbody className="table-border-bottom-0">
-                            <tr>
-                                <td>
-                                    Kouacou Landry
-                                </td>
-                                <td>10/01/1998</td>
-                                <td>CNI102030407</td>
-                                <td>0102030407</td>
-                                <td>190 000 FCFA</td>
-                                <td>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" id="" style={{marginLeft:4}}>
-                                        </Dropdown.Toggle>
+                        {
+                            DataConducteur?.data?.map((conducteur, index) => (
+                                <tr key={index}>
+                                    <td>{conducteur.nom} {conducteur.prenom}</td>
+                                    <td>{conducteur.date_naissance}</td>
+                                    <td>{conducteur.numero_piece_identite}</td>
+                                    <td>{conducteur.telephone}</td>
+                                    <td>{conducteur.salaire}</td> 
+                                    <td>
+                                        <Dropdown>
+                                            <Dropdown.Toggle variant="" id="" style={{ marginLeft: 4 }}>
+                                            </Dropdown.Toggle>
 
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Delete</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Koffi Christ</td>
-                                <td>20/11/1997</td>
-                                <td>CNI000998877</td>
-                                <td>0709090909</td>
-                                <td>170 000 FCFA</td>
-                                <td>
-                                    <Dropdown>
-                                        <Dropdown.Toggle variant="" id="" style={{marginLeft:4}}>
-                                        </Dropdown.Toggle>
-
-                                        <Dropdown.Menu>
-                                            <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
-                                            <Dropdown.Item href="#/action-2">Delete</Dropdown.Item>
-                                        </Dropdown.Menu>
-                                    </Dropdown>
-
-                                </td>
-                            </tr>
+                                            <Dropdown.Menu>
+                                                <Dropdown.Item href="#/action-1">Edit</Dropdown.Item>
+                                                <Dropdown.Item href="#/action-2">Delete</Dropdown.Item>
+                                            </Dropdown.Menu>
+                                        </Dropdown>
+                                    </td>
+                                </tr>
+                            ))
+                        }
                         </tbody>
                     </table>
                 </div>

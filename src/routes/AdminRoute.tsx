@@ -14,7 +14,6 @@ export default function AdminRoute() {
       try {
         const userData = await AuthUser.GetAuth();
         setUser(userData);
-        console.log('u', userData)
       } catch (error) {
         console.error(error);
       } finally {
