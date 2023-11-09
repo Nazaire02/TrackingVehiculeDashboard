@@ -18,7 +18,7 @@ export const getDetailVehicule = createAsyncThunk(
   'vehicule/get-detail',
   async (vehiculeData, { rejectWithValue }) => {
     try {
-      const response = await AuthRequest.get(`${ApiConstant.BACKEND_API.GET_DETAIL_VEHICULE}`, vehiculeData, { withCredentials: true, headers: { 'Authorization': `Bearer ${vehiculeData?.token}`} });
+      const response = await AuthRequest.post(`${ApiConstant.BACKEND_API.GET_DETAIL_VEHICULE}`, vehiculeData, { withCredentials: true, headers: { 'Authorization': `Bearer ${vehiculeData?.token}`} });
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data);

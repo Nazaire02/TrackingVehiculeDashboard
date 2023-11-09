@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DetailMaintenance, getAllMaintenance } from '../actions/MaintenanceAction';
+import { RechercheMaintenance, getAllMaintenance } from '../actions/MaintenanceAction';
 
 
 interface MaintenanceState {
@@ -37,22 +37,22 @@ export const getAllMaintenanceSlice = createSlice({
     }
 })
 
-export const detailMaintenanceSlice = createSlice({
+export const RechercheMaintenanceSlice = createSlice({
     name: 'maintenanceDetail', 
     initialState,
     reducers: {},
     extraReducers: (builder) => {
       builder
-          .addCase(DetailMaintenance.pending, (state) => {
+          .addCase(RechercheMaintenance.pending, (state) => {
             state.loading = true;
             state.error = null;
           })
-          .addCase(DetailMaintenance.fulfilled, (state, action: PayloadAction<any>) => {
+          .addCase(RechercheMaintenance.fulfilled, (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.maintenance = action.payload;
             state.error = null; 
           })
-          .addCase(DetailMaintenance.rejected, (state, action: PayloadAction<any>) => {
+          .addCase(RechercheMaintenance.rejected, (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.error = action.payload;
             state.maintenance = null; 
@@ -61,7 +61,7 @@ export const detailMaintenanceSlice = createSlice({
 })
 
 const rootReducer = {
-    MaintenanceCreate: detailMaintenanceSlice.reducer,
+    MaintenanceRecherche: RechercheMaintenanceSlice.reducer,
     MaintenanceGetAll: getAllMaintenanceSlice.reducer
 };
   

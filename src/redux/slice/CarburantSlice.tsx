@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DetailCarburant, getAllCarburant } from '../actions/CarburantAction';
+import { getAllCarburant, RechercheCarburant } from '../actions/CarburantAction';
 
 
 interface carburantState {
@@ -37,22 +37,22 @@ export const getAllCarburantSlice = createSlice({
     }
 })
 
-export const detailCarburantSlice = createSlice({
-    name: 'carburantDetail', 
+export const rechercheCarburantSlice = createSlice({
+    name: 'carburantRecherche', 
     initialState,
     reducers: {},
     extraReducers: (builder) => {
       builder
-          .addCase(DetailCarburant.pending, (state) => {
+          .addCase(RechercheCarburant.pending, (state) => {
             state.loading = true;
             state.error = null;
           })
-          .addCase(DetailCarburant.fulfilled, (state, action: PayloadAction<any>) => {
+          .addCase(RechercheCarburant.fulfilled, (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.carburant = action.payload;
             state.error = null; 
           })
-          .addCase(DetailCarburant.rejected, (state, action: PayloadAction<any>) => {
+          .addCase(RechercheCarburant.rejected, (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.error = action.payload;
             state.carburant = null; 
@@ -61,7 +61,7 @@ export const detailCarburantSlice = createSlice({
 })
 
 const rootReducer = {
-    carburantCreate: detailCarburantSlice.reducer,
+    carburantRecherche: rechercheCarburantSlice.reducer,
     carburantGetAll: getAllCarburantSlice.reducer
 };
   

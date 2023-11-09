@@ -15,6 +15,8 @@ import CreateTracking from './containers/CreateTracking'
 import Location from './containers/Location'
 import Dashboard from './containers/Dashboard'
 
+import 'leaflet/dist/leaflet.css';
+
 
 
 function App() {

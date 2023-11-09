@@ -21,9 +21,9 @@ const rootReduceur = combineReducers({
     vehiculeDelete: VehiculeSlice.vehiculeDelete,
     conduireCreate: ConduireSlice.conduireCreate,
     conduireGetAll: ConduireSlice.conduireGetAll,
-    carburantCreate: CarburantSlice.carburantCreate,
+    carburantRecherche: CarburantSlice.carburantRecherche,
     carburantGetAll: CarburantSlice.carburantGetAll,
-    MaintenanceCreate: MaintenanceSlice.MaintenanceCreate,
+    MaintenanceRecherche: MaintenanceSlice.MaintenanceRecherche,
     MaintenanceGetAll: MaintenanceSlice.MaintenanceGetAll,
     home: HomeSlice.home
 })
